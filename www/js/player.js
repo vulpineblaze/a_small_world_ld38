@@ -18,7 +18,6 @@ function playerCreate(game, playerGroup){
 
     player.body.fixedRotation = true;
 
-    player.body.setCircle(15);
 
     // player.body.setCircle(18);
 
@@ -34,22 +33,22 @@ function playerCreate(game, playerGroup){
     // game.physics.p2.setPostBroadphaseCallback(checkVeg, this);
     // console.log("player.name="+player.name);
 
-    var cirSize = 50;
-    var cirX = game.world.width/2;
-    var cirY = game.world.height/2;
+    player.cirSize = 15;
+    player.body.setCircle(player.cirSize);
+
     
     //player graphics
     g = game.add.graphics(0, 0);
     //graphics.lineStyle(2, 0xffd900, 1);
     g.beginFill(0x0000FF, 0.5);
-    g.drawCircle(cirX, cirY, cirSize);
+    g.drawCircle(0, 0, player.cirSize);
     g.endFill();
 
     playerSprite = game.add.sprite(0, 0, 'fake');
 
     // Add the graphics to the sprite as a child
-    playerSprite.addChild(g);
-    player.addChild(playerSprite);
+    playerSprite.g =playerSprite.addChild(g);
+    player.playerSprite = player.addChild(playerSprite);
 
 
 
@@ -74,8 +73,8 @@ function playerMovement(game,  player){
     player.body.velocity.x = 300*Math.cos(angle);
     player.body.velocity.y = 300*Math.sin(angle);
 
-    player.graphics.x = player.body.x;
-    player.graphics.y = player.body.y;
+    // player.graphics.x = player.body.x;
+    // player.graphics.y = player.body.y;
 
     // if (game.input.activePointer.x < player.x - game.camera.x)     {    
     // // mouse pointer is to the left  

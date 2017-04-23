@@ -37,10 +37,11 @@ function main(){
 	function create() {
 
 		
+		var gameX = 4000;
+		var gameY = 2250;
+		game.add.tileSprite(0, 0, gameX, gameY, 'background');
 
-		game.add.tileSprite(0, 0, 1920, 1920, 'background');
-
-	    game.world.setBounds(0, 0, 1920, 1920);
+	    game.world.setBounds(0, 0, gameX, gameY);
 
 	    // game.physics.startSystem(Phaser.Physics.P2JS);
 	    // game.physics.p2.setImpactEvents(true);
@@ -117,7 +118,7 @@ function main(){
 
 
 	    //  The score
-	    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+	    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
 
 	    //  Our controls.
 	    // cursors = game.input.keyboard.createCursorKeys();
@@ -141,6 +142,8 @@ function main(){
 
 	function update() {
 
+		scoreText.position.x = game.camera.x;
+		scoreText.position.y = game.camera.y;
 	    //  Collide the player and the stars with the platforms
 	    // game.physics.arcade.collide(player, platforms);
 	    // game.physics.arcade.collide(stars, platforms);
@@ -177,6 +180,24 @@ function main(){
 	    //  Add and update the score
 	    score += 10;
 	    scoreText.text = 'Score: ' + score;
+	    player.cirSize +=100;
+    	player.body.setCircle(player.cirSize);
+
+
+	    // Add the graphics to the sprite as a child
+	    player.playerSprite.g.kill();
+
+
+        g = game.add.graphics(0, 0);
+    //graphics.lineStyle(2, 0xffd900, 1);
+	    g.beginFill(0x0000FF, 0.5);
+	    g.drawCircle(0, 0, player.cirSize);
+	    g.endFill();
+
+
+
+	    // Add the graphics to the sprite as a child
+	    player.playerSprite.g = player.playerSprite.addChild(g);
 
 	}
 

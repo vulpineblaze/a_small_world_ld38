@@ -18,26 +18,27 @@ function rockCreate(game, rockGroup){
 
     rock.body.fixedRotation = true;
 
-    rock.body.setCircle(15);
 
     // rock.body.setCircle(18);
 
-    // rock.anchor.setTo(-0.5, 0.5);   
+    rock.cirSize = 15;
+    rock.body.setCircle(rock.cirSize);
+
+    
+    //player graphics
+    g = game.add.graphics(0, 0);
+    //graphics.lineStyle(2, 0xffd900, 1);
+    g.beginFill(0xFFFF0B, 0.5);
+    g.drawCircle(0, 0, rock.cirSize);
+    g.endFill();
+
+    rockSprite = game.add.sprite(0, 0, 'fake');
+
+    // Add the graphics to the sprite as a child
+    rockSprite.addChild(g);
+    rock.addChild(rockSprite);
 
 
-    // game.camera.follow(rock, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
-
-    //  Our two animations, walking left and right.
-    // rock.animations.add('left', [0, 1, 2, 3], 10, true);
-    // rock.animations.add('right', [5, 6, 7, 8], 10, true);
-
-    // game.physics.p2.setPostBroadphaseCallback(checkVeg, this);
-    // console.log("rock.name="+rock.name);
-    rock.graphics = game.add.graphics(rock.body.x, rock.body.y);
-    rock.graphics.lineStyle(0);
-    rock.graphics.beginFill(0xFFFF0B, 0.5);
-    rock.graphics.drawCircle(0, 0,15);
-    rock.graphics.endFill();
 
 	return rock;
 }
