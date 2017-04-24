@@ -39,8 +39,8 @@ function playerCreate(game, playerGroup){
     
     //player graphics
     g = game.add.graphics(0, 0);
-    //graphics.lineStyle(2, 0xffd900, 1);
-    g.beginFill(0x0000FF, 0.5);
+    g.lineStyle(5 , 0x5555BB, 0.4);
+    g.beginFill(0x0000FF, 0.8);
     g.drawCircle(0, 0, player.cirSize);
     g.endFill();
 
@@ -70,8 +70,8 @@ function playerMovement(game,  player){
     var angle = game.physics.arcade.angleToPointer(player);
     
     // console.log(angle.x);
-    player.body.velocity.x = 300*Math.cos(angle);
-    player.body.velocity.y = 300*Math.sin(angle);
+    player.body.velocity.x = Math.cos(angle)*(350-player.cirSize/3);
+    player.body.velocity.y = Math.sin(angle)*(350-player.cirSize/3);
 
     // player.graphics.x = player.body.x;
     // player.graphics.y = player.body.y;

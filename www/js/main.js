@@ -80,8 +80,11 @@ function main(){
 	    rockGroup = game.add.group();
 
 	    playerSprite = playerCreate(game, playerGroup);
-	    rock = rockCreate(game, rockGroup);
+	    rock = rockCreate(game, rockGroup,100,100,20);
 
+	    for (var i = 0; i < 12; i++){
+			makeRock();
+	    }
 
 	    // sword = swordCreate(game,playerGroup);
 	    // player.addChild(sword);
@@ -118,7 +121,7 @@ function main(){
 
 
 	    //  The score
-	    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+	    scoreText = game.add.text(16, 16, 'Score: 15', { fontSize: '32px', fill: '#fff' });
 
 	    //  Our controls.
 	    // cursors = game.input.keyboard.createCursorKeys();
@@ -133,8 +136,6 @@ function main(){
 		// };
 
 
-		console.log(playerSprite.body.debug);
-		console.log(rock.body.debug);
 		// console.log(sword.body.debug);
 		// console.log(stars.body.debug);
 	    
@@ -149,58 +150,105 @@ function main(){
 	    // game.physics.arcade.collide(stars, platforms);
 
 	    //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-	    game.physics.arcade.overlap(playerSprite, rock, collectStar, null, this);
+	    game.physics.arcade.overlap(playerSprite, rockGroup, collectStar, null, this);
+	    game.physics.arcade.overlap(rockGroup, rockGroup, rockCombine, null, this);
 	    // game.physics.arcade.overlap(sword, stars, collectStar, null, this);
 
 	    //  Reset the players velocity (movement)
 	    // player.body.setZeroVelocity();
 	    playerMovement(game, playerSprite);
-	    rockMovement(game,  rock);
 	    
+	    // console.log(rockGroup.length);
+
+	    if(rockGroup.length <= 13){
+	    	makeRock();
+	    }
 	    
-	    // swordSwipe(swordKey, sword, swipeDirection);
 
-		// swordStickToParent(sword, player);
-
-
-	    //  Allow the player to jump if they are touching the ground.
-	    // if (cursors.up.isDown && player.body.touching.down)
-	    // {
-	    //     player.body.velocity.y = -350;
-	    // }
-	    // window.graphics = player.graphics; 
+		// console.log(playerSprite.body);
+		// console.log(rock.body);
 
 	}
 
-	function collectStar (player, star) {
+	function collectStar (player, rock) {
 	    
 	    // Removes the star from the screen
-	    star.kill();
 
 	    //  Add and update the score
-	    score += 10;
-	    scoreText.text = 'Score: ' + score;
-	    player.cirSize +=100;
+	    // score += 10;
+	    player.cirSize = findNewSize(player.cirSize,rock.cirSize);
     	player.body.setCircle(player.cirSize);
+	    scoreText.text = 'Score: ' + parseFloat(player.cirSize).toFixed(1) ;
+
+	    rock.destroy();
 
 
 	    // Add the graphics to the sprite as a child
-	    player.playerSprite.g.kill();
+	    player.playerSprite.g.destroy();
+
+
+        g = game.add.graphics(0, 0);
+    	g.lineStyle(5+(player.cirSize/20) , 0x5555BB, 0.4);
+	    g.beginFill(0x0000FF, 0.8);
+	    g.drawCircle(0, 0, player.cirSize);
+	    g.endFill();
+
+	    player.playerSprite.g = player.playerSprite.addChild(g);
+
+
+	}function rockCombine (main, side) {
+	    
+	    // Removes the star from the screen
+
+	    //  Add and update the score
+	    // score += 10;
+	    main.cirSize = findNewSize(main.cirSize,side.cirSize);
+    	main.body.setCircle(main.cirSize);
+
+	    side.destroy();
+
+
+	    // Add the graphics to the sprite as a child
+	    main.rockSprite.g.destroy();
 
 
         g = game.add.graphics(0, 0);
     //graphics.lineStyle(2, 0xffd900, 1);
-	    g.beginFill(0x0000FF, 0.5);
-	    g.drawCircle(0, 0, player.cirSize);
+	    g.beginFill(0xFFFF0B, 0.5);
+	    g.drawCircle(0, 0, main.cirSize);
 	    g.endFill();
 
 
 
 	    // Add the graphics to the sprite as a child
-	    player.playerSprite.g = player.playerSprite.addChild(g);
+	    main.rockSprite.g = main.rockSprite.addChild(g);
+
 
 	}
 
+	function findNewSize(playerR, rockR){
+		var playerA = playerR*playerR*Math.PI;
+		var rockA = rockR*rockR*Math.PI;
+		playerA += rockA*0.9;
+		var retR = Math.sqrt(playerA/Math.PI);
+		return retR;
+	}
+
+	function randomIntFromInterval(min,max)
+	{
+	    return Math.floor(Math.random()*(max-min+1)+min);
+	}
+
+	function makeRock(){
+		var x = randomIntFromInterval(-500,500);
+		var y = randomIntFromInterval(-500,500);
+		var r = randomIntFromInterval(10,50);
+		var vel = 200;
+		var velX = randomIntFromInterval(-vel,vel);
+		var velY = randomIntFromInterval(-vel,vel);
+		var color = randomIntFromInterval(1,16777214);
+		rockCreate(game, rockGroup,x,y,r, velX, velY,color);
+	}
 }
 
 

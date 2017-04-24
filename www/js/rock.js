@@ -1,7 +1,7 @@
 
-function rockCreate(game, rockGroup){
+function rockCreate(game, rockGroup, x, y, r, velX, velY, color){
     var rock;
-   	rock = rockGroup.create(game.world.centerX+100, game.world.centerY+100);
+   	rock = rockGroup.create(game.world.centerX+x, game.world.centerY+y);
     rock.name="rock"
 
     
@@ -14,31 +14,40 @@ function rockCreate(game, rockGroup){
     //  rock physics properties. Give the little guy a slight bounce.
     // rock.body.bounce.y = 0.2;
     // rock.body.gravity.y = 300;
-    rock.body.collideWorldBounds = true;
+    // rock.body.collideWorldBounds = true;
+
+    rock.checkWorldBounds = true;
+    rock.outOfBoundsKill = true;
+
+
 
     rock.body.fixedRotation = true;
 
 
     // rock.body.setCircle(18);
 
-    rock.cirSize = 15;
+    rock.cirSize = r;
     rock.body.setCircle(rock.cirSize);
 
     
     //player graphics
     g = game.add.graphics(0, 0);
     //graphics.lineStyle(2, 0xffd900, 1);
-    g.beginFill(0xFFFF0B, 0.5);
+    g.beginFill(color, 0.8);
     g.drawCircle(0, 0, rock.cirSize);
     g.endFill();
 
     rockSprite = game.add.sprite(0, 0, 'fake');
 
     // Add the graphics to the sprite as a child
-    rockSprite.addChild(g);
-    rock.addChild(rockSprite);
+    rockSprite.g =rockSprite.addChild(g);
+    rock.rockSprite = rock.addChild(rockSprite);
 
 
+    // Add the graphics to the sprite as a child
+
+    rock.body.velocity.x = velX;
+    rock.body.velocity.y = velY;
 
 	return rock;
 }
