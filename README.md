@@ -40,7 +40,7 @@ Load via browser and play per instructions!
 * explore all of the map, as objects will leave the center (just like in space)
 
 ## Status
-Project is: _no longer continue -_ impactjs went obsolete 20xx 
+Project is: _no longer continue -_ impactjs went obsolete 2014 
 
 ## Inspiration
 This game was inspired by the prompt, and my interest in how unique the formation of each and every planet is.
