@@ -1,9 +1,5 @@
-# a_small_world_ld38
-ld38 submission
-
-
-# Project Name
-> Here goes your awesome project description!
+# A Small World
+> A small World is an in browser game where you start as a small planet which can grow by absorbing other objects in space.
 
 ## Table of contents
 * [General info](#general-info)
@@ -18,48 +14,36 @@ ld38 submission
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
-Put possible docs / coda link here.
+* A Small World was created for the [Ludum Dare Game Competition (LD#38)](https://ldjam.com/about)
+* It is an in browser game in which you control a small blue planet, that can be controlled with your cursor.  You can enjoy increasing your planet's size by simply moving over other space objecs to absorb them.
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![screenshot](https://github.com/vulpineblaze/a_small_world_ld38/blob/master/screenshotLD38.PNG)
 
 ## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* Phaser v2.6.1
+* impactjs
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
+http://fusionbombsderp.com/ld38/
 
 ### Requirements
-If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Phaser v2.6.1, linked through CDN.
 
 ### Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Code Examples
-Show examples of usage:
-`put-your-code-here`
+Load via browser and play per instructions!
 
 ## Features
-List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
-
-To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* move your cursor to move your blue planet
+* move your blue planet over other moving objects to absorb them and increase your planet's mass
+* the score tally's your current mass
+* explore all of the map, as objects will leave the center (just like in space)
 
 ## Status
-Project is: _in progress_, _finished_, _no longer continue_ and why?
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Project is: _no longer continue -_ impactjs went obsolete 20xx 
 
 ## Inspiration
-Add here credits. Project inspired by..., based on...
+This game was inspired by the prompt, and my interest in how unique the formation of each and every planet is.
 
 ## Contact
 Created by [@vulpineblaze](https://github.com/vulpineblaze) - feel free to contact me!
